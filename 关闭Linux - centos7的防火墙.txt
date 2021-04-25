@@ -1,0 +1,24 @@
+关闭Centos7的防火墙
+在每台虚拟机上分别执行以下指令:
+systemctl stop firewalld.service          #停止firewall
+systemctl disable firewalld.service       #禁止firewall开机启动
+
+关闭之后,查看防火墙状态:
+systemctl status firewalld.service
+变黑就关闭了
+
+
+[root@localhost ~]# systemctl stop firewalld.service
+[root@localhost ~]# systemctl disable firewalld.service  
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+Removed symlink /etc/systemd/system/basic.target.wants/firewalld.service.
+[root@localhost ~]# systemctl status firewalld.service
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; disabled; vendor preset: enabled)
+   Active: inactive (dead)
+
+4月 21 13:04:09 localhost.localdomain systemd[1]: Starting firewalld - dynamic firewa....
+4月 21 13:04:11 localhost.localdomain systemd[1]: Started firewalld - dynamic firewal....
+4月 21 13:24:37 localhost.localdomain systemd[1]: Stopping firewalld - dynamic firewa....
+4月 21 13:24:38 localhost.localdomain systemd[1]: Stopped firewalld - dynamic firewal....
+Hint: Some lines were ellipsized, use -l to show in full.

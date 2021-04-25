@@ -1,0 +1,54 @@
+安装前先安装 jdk
+kettle上传到Linux服务器的/export/server目录下
+解压
+unzip pdi-ce-8.2.0.0-342.zip
+2、配置环境变量
+vim /etc/profile
+# KETTLE 
+export KETTLE=/export/server/data-integration/
+export PATH=${KETTLE}:$PATH 
+然后执行以下命令，让配置生效
+ source /etc/profile 
+ 
+授权
+chmod 777 /export/server/data-integration/*
+
+3、在任意目录执行pan.sh -version命令
+pan.sh -version
+这种安装是成功的
+[root@localhost server]# pan.sh -version
+#######################################################################
+WARNING:  no libwebkitgtk-1.0 detected, some features will be unavailable
+    Consider installing the package with apt-get or yum.
+    e.g. 'sudo apt-get install libwebkitgtk-1.0-0'
+#######################################################################
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0
+14:05:02,725 INFO  [KarafBoot] Checking to see if org.pentaho.clean.karaf.cache is enabled
+14:05:02,855 INFO  [KarafInstance] 
+*******************************************************************************
+*** Karaf Instance Number: 1 at /export/server/data-integration/./system/ka ***
+***   raf/caches/pan/data-1                                                 ***
+*** Karaf Port:8802                                                         ***
+*** OSGI Service Port:9051                                                  ***
+*******************************************************************************
+
+4、在任意目录执行kitchen.sh -version命令
+kitchen.sh -version
+这种也是成功的
+
+[root@localhost server]# kitchen.sh -version
+#######################################################################
+WARNING:  no libwebkitgtk-1.0 detected, some features will be unavailable
+    Consider installing the package with apt-get or yum.
+    e.g. 'sudo apt-get install libwebkitgtk-1.0-0'
+#######################################################################
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0
+14:06:22,334 INFO  [KarafBoot] Checking to see if org.pentaho.clean.karaf.cache is enabled
+14:06:22,474 INFO  [KarafInstance] 
+*******************************************************************************
+*** Karaf Instance Number: 1 at /export/server/data-integration/./system/ka ***
+***   raf/caches/kitchen/data-1                                             ***
+*** Karaf Port:8802                                                         ***
+*** OSGI Service Port:9051                                                  ***
+*******************************************************************************
+

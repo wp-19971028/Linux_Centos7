@@ -1,0 +1,49 @@
+1、首先去Anaconda官网下载安装脚本
+Anaconda3-2019.07-Linux-x86_64.sh
+
+2、上传Anaconda3-2019.07-Linux-x86_64.sh
+将Anaconda3-2019.07-Linux-x86_64.sh上传到/opt/server
+3、运行Anaconda3-2019.07-Linux-x86_64.sh脚本
+sh Anaconda3-2019.07-Linux-x86_64.sh
+安装过程输入：一路回车、yes
+4、配置环境变量
+vim /etc/profile
+#Anaconda 
+export PATH=$PATH:/root/anaconda3/bin
+然后执行source命令让配置生效
+source /etc/profile
+然后vim /root/.bashrc文件, 添加以下内容,否则终端会出现base字样
+conda deactivate
+5、验证是否安装python3成功
+在终端中输入:python3
+安装Superset
+pip3 install cryptography
+pip3 install --upgrade setuptools pip
+yum upgrade python-setuptools
+yum install gcc gcc-c++ libffi-devel python-devel python-pip python-wheel openssl-devel libsasl2-devel openldap-devel
+pip  install superset==0.30.0 -i https://pypi.douban.com/simple
+
+
+pip install email_validator
+
+3、创建管理员用户名和密码
+fabmanager create-admin --app superset
+邮箱回车
+用户名等都是admin
+4、初始化superset
+superset db upgrade
+5、创建默认角色和权限
+superset init
+6、安装相关配套软件
+yum install python-devel -y
+yum install mysql-devel -y
+pip install mysqlclient
+
+7、启动superset
+打开浏览器，输入以下地址来访问Superset主页面
+superset run -h 主机IP -p 8080 --with-threads --reload --debugger
+ 
+7、登录superset
+http://192.168.88.160:8080/superset/welcome
+用户名： admin
+密码：123456
