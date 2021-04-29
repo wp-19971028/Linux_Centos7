@@ -1,0 +1,41 @@
+在node1主机上，解压zookeeper的压缩包到/export/server路径下去，然后准备进行安装
+cd /export/software
+tar -zxvf zookeeper-3.4.6.tar.gz -C /export/server/
+在node1主机上，修改配置文件
+cd /export/server/zookeeper-3.4.6/conf/
+cp zoo_sample.cfg zoo.cfg
+mkdir -p /export/server/zookeeper-3.4.6/zkdatas/
+vim  zoo.cfg
+# 修改以下内容
+#Zookeeper的数据存放目录
+dataDir=/export/servers/zookeeper-3.4.6/zkdatas
+# 保留多少个快照
+autopurge.snapRetainCount=3
+# 日志多少小时清理一次
+autopurge.purgeInterval=1
+# 集群中服务器地址
+server.1=node1:2888:3888
+server.2=node2:2888:3888
+server.3=node3:2888:3888
+
+在node1主机的/export/server/zookeeper-3.4.6/zkdatas/这个路径下创建一个文件，文件名为myid ,文件内容为1
+echo 1 > /export/server/zookeeper-3.4.6/zkdatas/myid 
+
+第一台机器上面执行以下两个命令
+scp -r  /export/server/zookeeper-3.4.6/ node2:/export/server/
+scp -r  /export/server/zookeeper-3.4.6/ node3:/export/server/
+
+
+第二台机器上修改myid的值为2
+echo 2 > /export/server/zookeeper-3.4.6/zkdatas/myid
+
+第三台机器上修改myid的值为3
+echo 3 > /export/server/zookeeper-3.4.6/zkdatas/myid
+
+配置全局环境遍历
+# 配置全局的环境遍历
+vim /etc/profile
+export ZOOKEEPER_HOME=/export/server/zookeeper-3.4.6
+export PATH=$PATH:${JAVA_PATH}:${MYSQL_HOME}/bin:${ZOOKEEPER_HOME}/bin
+# 立即生效	
+source /etc/profile

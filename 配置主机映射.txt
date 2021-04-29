@@ -1,0 +1,8 @@
+vim /etc/hosts
+
+
+# 保证原来的不改 G 跳到最后一行
+# o 在下面插入
+192.168.88.161 node1 node1.it.cn
+192.168.88.162 node2 node2.it.cn
+192.168.88.163 node3 node3.it.cn

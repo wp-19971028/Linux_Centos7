@@ -1,0 +1,6 @@
+vim /etc/hostname
+
+# 删除所有东西 写主机名 如:
+node0
+
+# 然后按ESC : wq

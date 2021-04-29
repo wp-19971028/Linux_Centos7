@@ -1,0 +1,30 @@
+1）什么是SELinux ?
+	1)SELinux是Linux的一种安全子系统
+	2)Linux中的权限管理是针对于文件的, 而不是针对进程的, 也就是说, 如果root启动了某个进程,  则这个进程可以操作任何一个文件。
+	3）SELinux在Linux的文件权限之外, 增加了对进程的限制, 进程只能在进程允许的范围内操作资源
+2）为什么要关闭SELinux
+如果开启了SELinux, 需要做非常复杂的配置, 才能正常使用系统, 在学习阶段, 在非生产环境, 一般不使用SELinux
+ SELinux的工作模式：
+  enforcing 强制模式
+  permissive 宽容模式
+  disabled 关闭
+
+4）关闭SELinux方式
+编辑每台虚拟机的Selinux的配置文件
+
+
+vim /etc/selinux/config 
+
+
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of three two values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected. 
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+

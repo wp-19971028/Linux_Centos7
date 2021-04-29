@@ -1,0 +1,10 @@
+在三台机器执行以下命令，生成公钥与私钥
+
+ssh-keygen -t rsa
+
+三台机器执行命令：
+ssh-copy-id node1
+
+在第一台机器上指行以下命令
+scp /root/.ssh/authorized_keys node2:/root/.ssh
+scp /root/.ssh/authorized_keys node3:/root/.ssh
