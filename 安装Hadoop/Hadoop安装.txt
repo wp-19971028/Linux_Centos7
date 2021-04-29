@@ -1,0 +1,80 @@
+安装Hadoop
+mkdir -p /export/software
+mkdir -p /export/server
+cd /export/software
+tar -zxvf hadoop-2.7.5.tar.gz -C /export/server/
+
+cd /export/server/hadoop-2.7.5/etc/hadoop
+
+
+修改配置文件
+hadoop-env.sh mapred-env.sh
+添加
+export JAVA_HOME=/export/server/jdk1.8.0_241
+配置
+core-site.xml
+hdfs-site.xml
+mapred-site.xml
+yarn-site.xml
+
+修改slaves
+vim slaves
+node1
+node2
+node3
+
+mkdir -p /export/server/hadoop-2.7.5/hadoopDatas/tempDatas
+mkdir -p /export/server/hadoop-2.7.5/hadoopDatas/namenodeDatas
+mkdir -p /export/server/hadoop-2.7.5/hadoopDatas/datanodeDatas
+mkdir -p /export/server/hadoop-2.7.5/hadoopDatas/nn/edits
+mkdir -p /export/server/hadoop-2.7.5/hadoopDatas/snn/name
+mkdir -p /export/server/hadoop-2.7.5/hadoopDatas/dfs/snn/edits
+
+
+scp -r /export/server/hadoop-2.7.5/ node2:/export/server/
+scp -r /export/server/hadoop-2.7.5/ node3:/export/server/
+
+vim  /etc/profile
+export HADOOP_HOME=/export/server/hadoop-2.7.5
+export PATH=:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
+
+source /etc/profile 
+scp -r /etc/profile node2:/etc/profile
+scp -r /etc/profile node3:/etc/profile
+三台机器都执行
+source /etc/profile
+
+首次启动 在node1 上格式化
+hadoop namenode -format
+
+启动集群
+start-all.sh
+
+启动历史任务服务进程(要单独启动)
+mr-jobhistory-daemon.sh start historyserver
+
+
+在node1上查看启动情况
+[root@node1 ~]# jps
+15281 NodeManager
+14883 DataNode
+15829 JobHistoryServer
+14714 NameNode
+47516 Jps
+15151 ResourceManager
+
+[root@node2 ~]# jps
+14306 SecondaryNameNode
+14422 NodeManager
+14169 DataNode
+25131 Jps
+[root@node3 ~]# jps
+14483 NodeManager
+24557 Jps
+14335 DataNode
+查看NameNode页面地址:
+http://192.168.88.161:50070/
+查看Yarn集群页面地址:
+http://192.168.88.161:8088/cluster
+查看MapReduce历史任务页面地址:
+http://192.168.88.161:19888/jobhistory
