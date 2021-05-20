@@ -1,0 +1,4 @@
+1、启动定时任务
+crontab -e
+随后在输入界面键入以下内容，每隔一分钟就去连接阿里云时间同步服务器，进行时钟同步
+*/1 * * * * /usr/sbin/ntpdate -u ntp4.aliyun.com;
